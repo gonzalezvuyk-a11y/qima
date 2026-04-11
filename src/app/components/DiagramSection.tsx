@@ -16,7 +16,7 @@ const NODE_CONFIGS: NodeConfig[] = [
     sub: "Capital",
     baseAngle: -60,
     color: "#c8e645",
-    icon: <Landmark className="w-5 h-5" />,
+    icon: <Landmark className="w-6 h-6" />,
     description: "Conectamos con fuentes de capital estratégico para impulsar proyectos de alto valor.",
   },
   {
@@ -24,7 +24,7 @@ const NODE_CONFIGS: NodeConfig[] = [
     sub: "Know how",
     baseAngle: 30,
     color: "#7bb8a8",
-    icon: <Handshake className="w-5 h-5" />,
+    icon: <Handshake className="w-6 h-6" />,
     description: "Articulamos expertise y conocimiento especializado para cada oportunidad.",
   },
   {
@@ -32,7 +32,7 @@ const NODE_CONFIGS: NodeConfig[] = [
     sub: "Negocios",
     baseAngle: 150,
     color: "#c8e645",
-    icon: <Rocket className="w-5 h-5" />,
+    icon: <Rocket className="w-6 h-6" />,
     description: "Estructuramos negocios escalables con visión de largo plazo.",
   },
   {
@@ -40,12 +40,12 @@ const NODE_CONFIGS: NodeConfig[] = [
     sub: "Clientes",
     baseAngle: 240,
     color: "#7bb8a8",
-    icon: <Users className="w-5 h-5" />,
+    icon: <Users className="w-6 h-6" />,
     description: "Facilitamos vínculos con socios y clientes que potencian cada negocio.",
   },
 ];
 
-const RADIUS = 180;
+const RADIUS = 188;
 const CENTER = 250;
 const SIZE = 500;
 
@@ -185,7 +185,7 @@ export function DiagramSection() {
   }, []);
 
   return (
-    <section className="relative bg-[#0a0a0a] py-36 overflow-hidden">
+    <section className="relative bg-[#0a0a0a] py-36 overflow-visible">
       <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] rounded-full border border-white/[0.015]" />
 
       <div className="max-w-[1440px] mx-auto px-12">
@@ -236,9 +236,9 @@ export function DiagramSection() {
                 className="absolute inset-0 w-full h-full"
                 style={{ overflow: "visible" }}
               >
-                <circle cx={centerPos.x} cy={centerPos.y} r={310} fill="none" stroke="white" strokeOpacity={0.025} strokeWidth={0.5} />
-                <circle cx={centerPos.x} cy={centerPos.y} r={RADIUS} fill="none" stroke="white" strokeOpacity={0.04} strokeWidth={0.5} />
-                <circle cx={centerPos.x} cy={centerPos.y} r={140} fill="none" stroke="#c8e645" strokeOpacity={0.04} strokeWidth={0.5} />
+                <circle cx={centerPos.x} cy={centerPos.y} r={310} fill="none" stroke="white" strokeOpacity={0.06} strokeWidth={0.7} />
+                <circle cx={centerPos.x} cy={centerPos.y} r={RADIUS} fill="none" stroke="white" strokeOpacity={0.11} strokeWidth={0.8} />
+                <circle cx={centerPos.x} cy={centerPos.y} r={158} fill="none" stroke="#c8e645" strokeOpacity={0.12} strokeWidth={0.8} />
 
                 {positions.map((pos, i) => {
                   const isActive = hoveredIdx === i || draggingIdx === i;
@@ -250,8 +250,8 @@ export function DiagramSection() {
                       x2={pos.x}
                       y2={pos.y}
                       stroke={isActive ? NODE_CONFIGS[i].color : "white"}
-                      strokeOpacity={isActive ? 0.2 : 0.04}
-                      strokeWidth={isActive ? 1 : 0.5}
+                      strokeOpacity={isActive ? 0.45 : 0.11}
+                      strokeWidth={isActive ? 1.4 : 0.8}
                       style={{ transition: "stroke 0.3s, stroke-opacity 0.3s" }}
                     />
                   );
@@ -262,9 +262,9 @@ export function DiagramSection() {
                     key={`particle-${i}`}
                     cx={p.x}
                     cy={p.y}
-                    r={1.5}
+                    r={2.1}
                     fill={p.color}
-                    opacity={p.opacity * 0.6}
+                    opacity={p.opacity * 0.95}
                   />
                 ))}
               </svg>
@@ -281,12 +281,16 @@ export function DiagramSection() {
                 onMouseDown={(e) => handleNodeMouseDown(-1, e)}
               >
                 <div
-                  className="w-36 h-36 rounded-full bg-gradient-to-br from-[#1a1a1a] to-[#0a0a0a] border border-[#c8e645]/15 flex items-center justify-center"
-                  style={{ boxShadow: "0 0 60px rgba(200,230,69,0.04)" }}
+                  className="w-[10.5rem] h-[10.5rem] rounded-full bg-gradient-to-br from-[#1a1a1a] to-[#0a0a0a] border border-[#c8e645]/15 flex items-center justify-center"
+                  style={{
+                    boxShadow:
+                      "0 0 92px rgba(200,230,69,0.14), inset 0 0 40px rgba(200,230,69,0.06)",
+                    animation: "qimaCorePulse 5.5s ease-in-out infinite",
+                  }}
                 >
                   <span
                     className="text-white tracking-[0.3em]"
-                    style={{ fontFamily: "Inter, sans-serif", fontSize: "1.375rem", fontWeight: 600 }}
+                    style={{ fontFamily: "Inter, sans-serif", fontSize: "1.5rem", fontWeight: 600 }}
                   >
                     QIMA
                   </span>
@@ -294,6 +298,10 @@ export function DiagramSection() {
                 <div
                   className="absolute inset-0 rounded-full border border-[#c8e645]/8"
                   style={{ animation: "pulse-ring 4s ease-out infinite" }}
+                />
+                <div
+                  className="absolute inset-0 rounded-full border border-[#7bb8a8]/10"
+                  style={{ animation: "pulse-ring-slow 6.8s ease-out infinite" }}
                 />
               </div>
 
@@ -321,20 +329,23 @@ export function DiagramSection() {
                     <div
                       className="relative flex flex-col items-center justify-center rounded-full transition-all duration-300"
                       style={{
-                        width: isActive ? 140 : 120,
-                        height: isActive ? 140 : 120,
-                        border: `1px solid ${isActive ? node.color + "40" : node.color + "18"}`,
+                        width: isActive ? 186 : 160,
+                        height: isActive ? 186 : 160,
+                        border: `1px solid ${isActive ? node.color + "75" : node.color + "35"}`,
                         background: isActive
-                          ? `radial-gradient(circle, ${node.color}10, transparent)`
-                          : `${node.color}04`,
-                        boxShadow: isActive ? `0 0 40px ${node.color}10` : "none",
+                          ? `radial-gradient(circle, ${node.color}22, transparent)`
+                          : `${node.color}08`,
+                        boxShadow: isActive
+                          ? `0 0 70px ${node.color}26, 0 8px 34px ${node.color}18`
+                          : `0 0 24px ${node.color}0d`,
+                        animation: `nodeFloat ${7 + i * 0.8}s ease-in-out infinite ${i * 0.25}s`,
                       }}
                     >
                       <div
                         className="mb-2 transition-transform duration-300"
                         style={{
-                          color: isActive ? node.color : node.color + "80",
-                          transform: isActive ? "scale(1.15)" : "scale(1)",
+                          color: isActive ? node.color : node.color + "a6",
+                          transform: isActive ? "scale(1.22)" : "scale(1)",
                         }}
                       >
                         {node.icon}
@@ -342,10 +353,10 @@ export function DiagramSection() {
                       <div
                         style={{
                           fontFamily: "Inter, sans-serif",
-                          fontSize: "0.8125rem",
+                          fontSize: "0.9375rem",
                           fontWeight: 500,
                           letterSpacing: "0.04em",
-                          color: isActive ? "white" : "rgba(255,255,255,0.7)",
+                          color: isActive ? "white" : "rgba(255,255,255,0.82)",
                         }}
                       >
                         {node.label}
@@ -353,9 +364,9 @@ export function DiagramSection() {
                       <div
                         style={{
                           fontFamily: "Inter, sans-serif",
-                          fontSize: "0.6875rem",
+                          fontSize: "0.8125rem",
                           fontWeight: 300,
-                          color: isActive ? node.color : "rgba(255,255,255,0.3)",
+                          color: isActive ? node.color : "rgba(255,255,255,0.52)",
                         }}
                       >
                         {node.sub}
@@ -372,12 +383,12 @@ export function DiagramSection() {
                       }}
                     >
                       <div
-                        className="relative px-5 py-4 rounded-2xl max-w-[240px] text-center"
+                        className="relative px-5 py-4 rounded-2xl max-w-[260px] text-center"
                         style={{
-                          background: "linear-gradient(135deg, rgba(30,30,30,0.97), rgba(18,18,18,0.97))",
-                          border: `1px solid ${node.color}25`,
-                          boxShadow: `0 12px 40px rgba(0,0,0,0.5), 0 0 20px ${node.color}08`,
-                          backdropFilter: "blur(16px)",
+                          background: "linear-gradient(135deg, rgba(33,33,33,0.98), rgba(14,14,14,0.98))",
+                          border: `1px solid ${node.color}40`,
+                          boxShadow: `0 14px 46px rgba(0,0,0,0.6), 0 0 24px ${node.color}20`,
+                          backdropFilter: "blur(20px)",
                         }}
                       >
                         <div
@@ -398,7 +409,7 @@ export function DiagramSection() {
                             fontSize: "0.75rem",
                             fontWeight: 300,
                             lineHeight: 1.6,
-                            color: "rgba(255,255,255,0.6)",
+                            color: "rgba(255,255,255,0.82)",
                           }}
                         >
                           {node.description}
@@ -424,8 +435,20 @@ export function DiagramSection() {
 
       <style>{`
         @keyframes pulse-ring {
-          0% { transform: scale(1); opacity: 0.6; }
-          100% { transform: scale(1.8); opacity: 0; }
+          0% { transform: scale(1); opacity: 0.75; }
+          100% { transform: scale(2.2); opacity: 0; }
+        }
+        @keyframes pulse-ring-slow {
+          0% { transform: scale(1); opacity: 0.42; }
+          100% { transform: scale(2.85); opacity: 0; }
+        }
+        @keyframes qimaCorePulse {
+          0%, 100% { transform: scale(1); }
+          50% { transform: scale(1.035); }
+        }
+        @keyframes nodeFloat {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-6px); }
         }
       `}</style>
     </section>

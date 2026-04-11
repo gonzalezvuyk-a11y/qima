@@ -77,7 +77,8 @@ export function TeamSection() {
           {teamMembers.map((m, i) => (
             <button
               key={m.name}
-              onClick={() => setActive(i)}
+              onMouseEnter={() => setActive(i)}
+              onFocus={() => setActive(i)}
               className={`group relative text-left rounded-2xl overflow-hidden transition-all duration-500 ${
                 active === i
                   ? "ring-1 ring-[#c8e645]/40"

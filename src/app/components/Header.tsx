@@ -27,12 +27,29 @@ export function Header() {
       }`}
     >
       <div className="max-w-[1440px] mx-auto px-12 flex items-center justify-between h-20">
-        <a href="#" className="flex items-center gap-2">
+        <a href="#" className="group relative flex items-center gap-2 px-2 py-1 rounded-md">
           <span
-            className="tracking-[0.35em] text-white"
-            style={{ fontFamily: "Inter, sans-serif", fontSize: "1.25rem", fontWeight: 600 }}
+            className="absolute inset-0 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none"
+            style={{
+              background:
+                "radial-gradient(circle at 50% 50%, rgba(200,230,69,0.22) 0%, rgba(200,230,69,0) 72%)",
+            }}
+          />
+          <span
+            className="relative tracking-[0.35em] text-white transition-all duration-400 group-hover:text-[#d8ef65]"
+            style={{
+              fontFamily: "Inter, sans-serif",
+              fontSize: "1.25rem",
+              fontWeight: 600,
+              textShadow: "0 0 0 rgba(200,230,69,0)",
+            }}
           >
-            QIMA
+            <span className="inline-block transition-transform duration-500 group-hover:-translate-y-[1px]">
+              QIMA
+            </span>
+            <span
+              className="absolute -bottom-[2px] left-0 h-[1.5px] w-0 bg-gradient-to-r from-[#c8e645] to-[#7bb8a8] transition-all duration-500 group-hover:w-full"
+            />
           </span>
         </a>
 
