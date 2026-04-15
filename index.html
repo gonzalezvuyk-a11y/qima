@@ -10,6 +10,14 @@
 
     <body>
       <div id="root"></div>
+      <script>
+        if (window.location.hash.includes("figmacapture=")) {
+          const captureScript = document.createElement("script");
+          captureScript.src = "https://mcp.figma.com/mcp/html-to-design/capture.js";
+          captureScript.async = true;
+          document.head.appendChild(captureScript);
+        }
+      </script>
       <script type="module" src="/src/main.tsx"></script>
     </body>
   </html>

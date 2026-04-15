@@ -7,18 +7,21 @@ const companies = [
     description:
       "Soluciones especializadas para rehabilitación de tuberías y desarrollo técnico de alto valor.",
     accent: "#7bb8a8",
+    href: "/cipp",
   },
   {
     name: "TAU",
     description:
       "Capacidad operativa y técnica aplicada a soluciones de ingeniería y estructura de proyectos.",
     accent: "#c8e645",
+    href: "/tau",
   },
   {
     name: "ARTIA",
     description:
       "Visión orientada a la inversión, estructuración inteligente y desarrollo de oportunidades.",
     accent: "#8b9cc0",
+    href: "/artia",
   },
 ];
 
@@ -119,7 +122,8 @@ export function EcosystemSection() {
         </div>
 
         <div className="grid grid-cols-12 gap-6 auto-rows-[minmax(130px,auto)]">
-          <article
+          <a
+            href={featured.href}
             className={`col-span-12 md:col-span-6 md:row-span-2 relative p-10 border border-white/[0.08] bg-white/[0.03] rounded-3xl hover:border-[#c8e645]/35 transition-all duration-500 group overflow-hidden ${canHoverCursor ? "cursor-none" : ""}`}
             onMouseEnter={() => onCardEnter("Saber más")}
             onMouseMove={onCardMove}
@@ -164,58 +168,106 @@ export function EcosystemSection() {
             >
               {featured.description}
             </p>
-            <a
-              href="#"
+            <span
               className="inline-flex items-center gap-2 text-white/70 hover:text-white transition-colors duration-300 group/link relative z-10"
               style={{ fontFamily: "Inter, sans-serif", fontSize: "0.875rem", fontWeight: 500 }}
             >
               Conocer empresa
               <ArrowRight className="w-4 h-4 group-hover/link:translate-x-1 transition-transform duration-300" />
-            </a>
-          </article>
+            </span>
+          </a>
 
-          {secondary.map((company) => (
-            <div
-              key={company.name}
-              className={`col-span-12 md:col-span-6 relative p-9 border border-white/[0.06] bg-white/[0.02] rounded-3xl hover:border-white/[0.14] hover:bg-white/[0.045] transition-all duration-500 group ${canHoverCursor ? "cursor-none" : ""}`}
-              onMouseEnter={() => onCardEnter("Saber más")}
-              onMouseMove={onCardMove}
-              onMouseLeave={onCardLeave}
-            >
-              <div
-                className="absolute top-0 left-6 right-6 h-[2px] rounded-full transition-all duration-500 opacity-0 group-hover:opacity-100"
-                style={{ backgroundColor: company.accent }}
-              />
+          {secondary.map((company) => {
+            const isLinked = company.href !== "#";
 
+            if (isLinked) {
+              return (
+                <a
+                  key={company.name}
+                  href={company.href}
+                  className={`col-span-12 md:col-span-6 relative p-9 border border-white/[0.06] bg-white/[0.02] rounded-3xl hover:border-white/[0.14] hover:bg-white/[0.045] transition-all duration-500 group ${canHoverCursor ? "cursor-none" : ""}`}
+                  onMouseEnter={() => onCardEnter("Saber más")}
+                  onMouseMove={onCardMove}
+                  onMouseLeave={onCardLeave}
+                >
+                  <div
+                    className="absolute top-0 left-6 right-6 h-[2px] rounded-full transition-all duration-500 opacity-0 group-hover:opacity-100"
+                    style={{ backgroundColor: company.accent }}
+                  />
+
+                  <div
+                    className="mb-8 tracking-[0.15em]"
+                    style={{
+                      fontFamily: "Inter, sans-serif",
+                      fontSize: "1.5rem",
+                      fontWeight: 600,
+                      color: company.accent,
+                    }}
+                  >
+                    {company.name}
+                  </div>
+
+                  <p
+                    className="text-white/40 mb-8"
+                    style={{ fontFamily: "Inter, sans-serif", fontSize: "0.9375rem", fontWeight: 300, lineHeight: 1.7 }}
+                  >
+                    {company.description}
+                  </p>
+
+                  <span
+                    className="inline-flex items-center gap-2 text-white/50 hover:text-white transition-colors duration-300 group/link"
+                    style={{ fontFamily: "Inter, sans-serif", fontSize: "0.8125rem", fontWeight: 400 }}
+                  >
+                    Conocer empresa
+                    <ArrowRight className="w-3.5 h-3.5 group-hover/link:translate-x-1 transition-transform duration-300" />
+                  </span>
+                </a>
+              );
+            }
+
+            return (
               <div
-                className="mb-8 tracking-[0.15em]"
-                style={{
-                  fontFamily: "Inter, sans-serif",
-                  fontSize: "1.5rem",
-                  fontWeight: 600,
-                  color: company.accent,
-                }}
+                key={company.name}
+                className={`col-span-12 md:col-span-6 relative p-9 border border-white/[0.06] bg-white/[0.02] rounded-3xl hover:border-white/[0.14] hover:bg-white/[0.045] transition-all duration-500 group ${canHoverCursor ? "cursor-none" : ""}`}
+                onMouseEnter={() => onCardEnter("Saber más")}
+                onMouseMove={onCardMove}
+                onMouseLeave={onCardLeave}
               >
-                {company.name}
+                <div
+                  className="absolute top-0 left-6 right-6 h-[2px] rounded-full transition-all duration-500 opacity-0 group-hover:opacity-100"
+                  style={{ backgroundColor: company.accent }}
+                />
+
+                <div
+                  className="mb-8 tracking-[0.15em]"
+                  style={{
+                    fontFamily: "Inter, sans-serif",
+                    fontSize: "1.5rem",
+                    fontWeight: 600,
+                    color: company.accent,
+                  }}
+                >
+                  {company.name}
+                </div>
+
+                <p
+                  className="text-white/40 mb-8"
+                  style={{ fontFamily: "Inter, sans-serif", fontSize: "0.9375rem", fontWeight: 300, lineHeight: 1.7 }}
+                >
+                  {company.description}
+                </p>
+
+                <a
+                  href={company.href}
+                  className="inline-flex items-center gap-2 text-white/50 hover:text-white transition-colors duration-300 group/link"
+                  style={{ fontFamily: "Inter, sans-serif", fontSize: "0.8125rem", fontWeight: 400 }}
+                >
+                  Conocer empresa
+                  <ArrowRight className="w-3.5 h-3.5 group-hover/link:translate-x-1 transition-transform duration-300" />
+                </a>
               </div>
-
-              <p
-                className="text-white/40 mb-8"
-                style={{ fontFamily: "Inter, sans-serif", fontSize: "0.9375rem", fontWeight: 300, lineHeight: 1.7 }}
-              >
-                {company.description}
-              </p>
-
-              <a
-                href="#"
-                className="inline-flex items-center gap-2 text-white/50 hover:text-white transition-colors duration-300 group/link"
-                style={{ fontFamily: "Inter, sans-serif", fontSize: "0.8125rem", fontWeight: 400 }}
-              >
-                Conocer empresa
-                <ArrowRight className="w-3.5 h-3.5 group-hover/link:translate-x-1 transition-transform duration-300" />
-              </a>
-            </div>
-          ))}
+            );
+          })}
 
           <div className="col-span-12 md:col-span-4 p-7 rounded-2xl border border-white/[0.06] bg-white/[0.015]">
             <div

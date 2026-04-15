@@ -99,78 +99,69 @@ export function ProcessSection() {
   return (
     <section id="process" className="relative bg-[#f3efe8] py-36 overflow-visible">
       <div className="max-w-[1440px] mx-auto px-12">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12">
-          <div className="md:col-span-4 md:sticky md:top-28 self-start">
-            <div
-              className="text-[#0a0a0a]/40 mb-4 tracking-[0.2em] uppercase"
-              style={{ fontFamily: "Inter, sans-serif", fontSize: "0.6875rem", fontWeight: 500 }}
-            >
-              Cómo trabajamos
-            </div>
-            <h2
-              className="text-[#0a0a0a] max-w-[430px]"
-              style={{
-                fontFamily: "'DM Serif Display', serif",
-                fontSize: "clamp(2.4rem, 4.2vw, 3.7rem)",
-                fontWeight: 400,
-                lineHeight: 1.06,
-              }}
-            >
-              Nuestro proceso de{" "}
-              <em style={{ fontStyle: "italic" }}>articulación</em>.
-            </h2>
-            <p
-              className="text-[#0a0a0a]/55 mt-6 max-w-[360px]"
-              style={{ fontFamily: "Inter, sans-serif", fontSize: "0.95rem", fontWeight: 300, lineHeight: 1.75 }}
-            >
-              Una secuencia de cuatro momentos que conecta análisis, relaciones,
-              estructura y crecimiento sostenible.
-            </p>
+        <div className="text-center max-w-[780px] mx-auto">
+          <div
+            className="text-[#0a0a0a]/40 mb-4 tracking-[0.2em] uppercase"
+            style={{ fontFamily: "Inter, sans-serif", fontSize: "0.6875rem", fontWeight: 500 }}
+          >
+            Cómo trabajamos
           </div>
+          <h2
+            className="text-[#0a0a0a]"
+            style={{
+              fontFamily: "'DM Serif Display', serif",
+              fontSize: "clamp(2.4rem, 4.2vw, 3.8rem)",
+              fontWeight: 400,
+              lineHeight: 1.06,
+            }}
+          >
+            Nuestro proceso de{" "}
+            <em style={{ fontStyle: "italic" }}>articulación</em>.
+          </h2>
+          <p
+            className="text-[#0a0a0a]/55 mt-6 max-w-[560px] mx-auto"
+            style={{ fontFamily: "Inter, sans-serif", fontSize: "1rem", fontWeight: 300, lineHeight: 1.78 }}
+          >
+            Una secuencia de cuatro momentos que conecta análisis, relaciones,
+            estructura y crecimiento sostenible.
+          </p>
+        </div>
 
-          <div className="md:col-span-8">
+        <div className="mt-14 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
           {steps.map((step, i) => {
             const IconComponent = icons[i];
             return (
-              <div
+              <article
                 key={step.number}
-                className={`relative ${i === 0 ? "" : "md:-mt-56"} md:min-h-[72vh]`}
-                style={{ zIndex: i + 1 }}
+                className="relative px-8 py-10 md:px-8 md:py-10 group rounded-2xl border border-[#0a0a0a]/[0.08] bg-[#f7f4ee]/95 backdrop-blur-sm transition-all duration-500 hover:bg-white hover:shadow-[0_16px_50px_rgba(0,0,0,0.12)] hover:border-[#c8e645]/40"
               >
-                <div className="md:sticky md:top-28">
-                  <div className="relative px-8 py-10 md:px-10 md:py-12 group rounded-2xl border border-[#0a0a0a]/[0.08] bg-[#f7f4ee]/95 backdrop-blur-sm transition-all duration-500 hover:bg-white hover:shadow-[0_16px_50px_rgba(0,0,0,0.12)] hover:border-[#c8e645]/40">
-                    {/* Abstract orbital icon */}
-                    <div className="w-[160px] h-[160px] mx-auto mb-8 opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700">
-                      <IconComponent />
-                    </div>
-
-                    <div
-                      className="text-[#8aad1a] group-hover:text-[#6d8a15] transition-colors duration-500 mb-4"
-                      style={{ fontFamily: "Inter, sans-serif", fontSize: "2rem", fontWeight: 300 }}
-                    >
-                      {step.number}
-                    </div>
-                    <h3
-                      className="text-[#0a0a0a] transition-colors duration-500 mb-4"
-                      style={{ fontFamily: "Inter, sans-serif", fontSize: "1.38rem", fontWeight: 500, lineHeight: 1.3 }}
-                    >
-                      {step.title}
-                    </h3>
-                    <p
-                      className="text-[#0a0a0a]/60 group-hover:text-[#0a0a0a]/78 transition-colors duration-500 max-w-[620px]"
-                      style={{ fontFamily: "Inter, sans-serif", fontSize: "1rem", fontWeight: 300, lineHeight: 1.8 }}
-                    >
-                      {step.text}
-                    </p>
-
-                    {/* Top line accent */}
-                    <div className="absolute top-0 left-8 right-8 h-[2px] bg-[#c8e645]/30 group-hover:bg-[#c8e645]/70 transition-all duration-500 rounded-full" />
-                  </div>
+                <div className="w-[120px] h-[120px] mx-auto mb-7 opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700">
+                  <IconComponent />
                 </div>
-              </div>
+
+                <div
+                  className="text-[#8aad1a] group-hover:text-[#6d8a15] transition-colors duration-500 mb-3"
+                  style={{ fontFamily: "Inter, sans-serif", fontSize: "2rem", fontWeight: 300 }}
+                >
+                  {step.number}
+                </div>
+                <h3
+                  className="text-[#0a0a0a] transition-colors duration-500 mb-4"
+                  style={{ fontFamily: "Inter, sans-serif", fontSize: "1.68rem", fontWeight: 500, lineHeight: 1.2 }}
+                >
+                  {step.title}
+                </h3>
+                <p
+                  className="text-[#0a0a0a]/60 group-hover:text-[#0a0a0a]/78 transition-colors duration-500"
+                  style={{ fontFamily: "Inter, sans-serif", fontSize: "1rem", fontWeight: 300, lineHeight: 1.8 }}
+                >
+                  {step.text}
+                </p>
+
+                <div className="absolute top-0 left-8 right-8 h-[2px] bg-[#c8e645]/30 group-hover:bg-[#c8e645]/70 transition-all duration-500 rounded-full" />
+              </article>
             );
           })}
-        </div>
         </div>
       </div>
     </section>

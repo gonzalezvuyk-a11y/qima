@@ -9,6 +9,9 @@ import { OpportunitiesSection } from "./components/OpportunitiesSection";
 import { EcosystemSection } from "./components/EcosystemSection";
 import { CTASection } from "./components/CTASection";
 import { Footer } from "./components/Footer";
+import { TauPage } from "./components/TauPage";
+import { CippPage } from "./components/CippPage";
+import { ArtiaPage } from "./components/ArtiaPage";
 
 function layerStyle(layer: number, delayMs: number) {
   return {
@@ -59,23 +62,37 @@ function splitTextIntoWords(element: HTMLElement) {
 }
 
 export default function App() {
+  const pathname = typeof window !== "undefined" ? window.location.pathname : "/";
+  const isTauPage = pathname === "/tau" || pathname === "/tau/";
+  const isCippPage = pathname === "/cipp" || pathname === "/cipp/";
+  const isArtiaPage = pathname === "/artia" || pathname === "/artia/";
+
   useEffect(() => {
     const sections = Array.from(
       document.querySelectorAll<HTMLElement>(".qima-reveal")
     );
 
     sections.forEach((section) => {
-      const wordNodes = Array.from(
+      const titleNodes = Array.from(
         section.querySelectorAll<HTMLElement>(
-          "h1, h2, h3, h4, p, blockquote"
+          "h1, h2, h3, h4"
         )
       );
 
-      wordNodes.forEach((node, index) => {
+      titleNodes.forEach((node, index) => {
         if (node.dataset.wordSkip === "true") return;
         node.classList.add("qima-reveal-text-word");
         node.style.setProperty("--text-index", String(index));
         splitTextIntoWords(node);
+      });
+
+      const paragraphNodes = Array.from(
+        section.querySelectorAll<HTMLElement>("p, blockquote")
+      );
+
+      paragraphNodes.forEach((node, index) => {
+        node.classList.add("qima-reveal-paragraph");
+        node.style.setProperty("--paragraph-index", String(index));
       });
 
       const blockNodes = Array.from(
@@ -116,6 +133,18 @@ export default function App() {
     sections.forEach((section) => observer.observe(section));
     return () => observer.disconnect();
   }, []);
+
+  if (isTauPage) {
+    return <TauPage />;
+  }
+
+  if (isCippPage) {
+    return <CippPage />;
+  }
+
+  if (isArtiaPage) {
+    return <ArtiaPage />;
+  }
 
   return (
     <div

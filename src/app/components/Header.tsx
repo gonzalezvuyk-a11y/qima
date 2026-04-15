@@ -11,6 +11,9 @@ const navItems = [
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
+  const pathname = typeof window !== "undefined" ? window.location.pathname : "/";
+  const isSubpage = pathname !== "/" && pathname !== "";
+  const baseHref = isSubpage ? "/" : "";
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 40);
@@ -27,7 +30,7 @@ export function Header() {
       }`}
     >
       <div className="max-w-[1440px] mx-auto px-12 flex items-center justify-between h-20">
-        <a href="#" className="group relative flex items-center gap-2 px-2 py-1 rounded-md">
+        <a href="/" className="group relative flex items-center gap-2 px-2 py-1 rounded-md">
           <span
             className="absolute inset-0 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none"
             style={{
@@ -57,7 +60,7 @@ export function Header() {
           {navItems.map((item) => (
             <a
               key={item.href}
-              href={item.href}
+              href={`${baseHref}${item.href}`}
               className="text-white/60 hover:text-white transition-colors duration-300"
               style={{ fontFamily: "Inter, sans-serif", fontSize: "0.8125rem", fontWeight: 400, letterSpacing: "0.02em" }}
             >
@@ -65,7 +68,7 @@ export function Header() {
             </a>
           ))}
           <a
-            href="#contact"
+            href={`${baseHref}#contact`}
             className="ml-4 px-6 py-2.5 rounded-full bg-[#c8e645] text-[#0a0a0a] hover:bg-[#d4ee5a] transition-all duration-300"
             style={{ fontFamily: "Inter, sans-serif", fontSize: "0.8125rem", fontWeight: 500, letterSpacing: "0.02em" }}
           >

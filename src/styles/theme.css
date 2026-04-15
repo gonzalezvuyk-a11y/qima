@@ -177,13 +177,13 @@
   filter: blur(8px);
   transform: translateY(1.05em);
   transition:
-    opacity 0.58s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.72s cubic-bezier(0.16, 1, 0.3, 1),
-    filter 0.65s ease-out;
+    opacity 0.82s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1.04s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.88s ease-out;
   transition-delay: calc(
     var(--reveal-delay, 0ms) +
-    (var(--text-index, 0) * 52ms) +
-    (var(--word-index, 0) * 20ms)
+    (var(--text-index, 0) * 72ms) +
+    (var(--word-index, 0) * 34ms)
   );
   will-change: opacity, transform, filter;
 }
@@ -191,6 +191,21 @@
 .qima-reveal.is-visible .qima-word {
   opacity: 1;
   filter: blur(0);
+  transform: translateY(0);
+}
+
+.qima-reveal-paragraph {
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 0.62s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.68s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: calc(var(--reveal-delay, 0ms) + (var(--paragraph-index, 0) * 70ms));
+  will-change: opacity, transform;
+}
+
+.qima-reveal.is-visible .qima-reveal-paragraph {
+  opacity: 1;
   transform: translateY(0);
 }
 
@@ -290,6 +305,197 @@ section[id] {
   scroll-margin-top: 6rem;
 }
 
+.tau-page {
+  position: relative;
+  isolation: isolate;
+  background:
+    radial-gradient(1200px 680px at 80% -10%, rgba(38, 188, 199, 0.13), transparent 62%),
+    radial-gradient(760px 460px at 14% 14%, rgba(39, 96, 172, 0.17), transparent 70%),
+    #07111d;
+}
+
+.tau-tech-grid {
+  background-image:
+    linear-gradient(rgba(166, 200, 230, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(166, 200, 230, 0.08) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), transparent 88%);
+  animation: tau-grid-shift 24s linear infinite;
+}
+
+.tau-frame::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(126, 212, 224, 0.22);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.tau-data-overlay {
+  background:
+    radial-gradient(circle at 72% 22%, rgba(100, 229, 240, 0.16), transparent 38%),
+    linear-gradient(115deg, rgba(88, 220, 230, 0.15), transparent 38%),
+    linear-gradient(rgba(145, 190, 225, 0.14) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(145, 190, 225, 0.14) 1px, transparent 1px);
+  background-size: auto, auto, 40px 40px, 40px 40px;
+  mix-blend-mode: screen;
+  opacity: 0.46;
+}
+
+.tau-shine {
+  position: relative;
+}
+
+.tau-shine::after {
+  content: "";
+  position: absolute;
+  top: -120%;
+  left: -35%;
+  width: 42%;
+  height: 340%;
+  transform: rotate(22deg);
+  background: linear-gradient(
+    90deg,
+    rgba(114, 224, 233, 0) 0%,
+    rgba(114, 224, 233, 0.08) 44%,
+    rgba(114, 224, 233, 0) 100%
+  );
+  animation: tau-sheen 7s ease-in-out infinite;
+}
+
+.tau-orbit {
+  position: absolute;
+  inset: 50%;
+  border: 1px solid rgba(137, 180, 211, 0.11);
+  border-radius: 999px;
+  transform: translate(-50%, -50%);
+}
+
+.tau-orbit-lg {
+  width: 96%;
+  height: 86%;
+  animation: tau-orbit-spin 26s linear infinite;
+}
+
+.tau-orbit-md {
+  width: 72%;
+  height: 64%;
+  animation: tau-orbit-spin 20s linear infinite reverse;
+}
+
+.tau-orbit-sm {
+  width: 52%;
+  height: 48%;
+  animation: tau-orbit-spin 16s linear infinite;
+}
+
+.service-bento-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.6rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background:
+    linear-gradient(135deg, rgba(10, 25, 41, 0.96), rgba(8, 20, 34, 0.96));
+  transition:
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.45s ease,
+    box-shadow 0.45s ease;
+}
+
+.service-bento-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 64% 24%, color-mix(in srgb, var(--service-accent, #5ee0e9) 26%, transparent), transparent 58%);
+  opacity: 0.55;
+  pointer-events: none;
+  transition: opacity 0.45s ease;
+}
+
+.service-bento-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 2rem;
+  right: 2rem;
+  height: 2px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--service-accent, #5ee0e9) 65%, transparent);
+  opacity: 0.35;
+  transition: opacity 0.45s ease;
+}
+
+.service-bento-card:hover {
+  transform: translateY(-5px);
+  border-color: color-mix(in srgb, var(--service-accent, #5ee0e9) 42%, rgba(255, 255, 255, 0.12));
+  box-shadow: 0 20px 55px rgba(5, 12, 24, 0.5);
+}
+
+.service-bento-card:hover::before {
+  opacity: 0.9;
+}
+
+.service-bento-card:hover::after {
+  opacity: 0.8;
+}
+
+.service-bento-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.55rem;
+  height: 2.55rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--service-accent, #5ee0e9) 58%, rgba(255, 255, 255, 0.18));
+  background: color-mix(in srgb, var(--service-accent, #5ee0e9) 18%, rgba(7, 18, 30, 0.84));
+  color: color-mix(in srgb, var(--service-accent, #5ee0e9) 92%, #dff9ff);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+}
+
+.service-bento-title {
+  color: #eff6ff;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.service-bento-text {
+  color: #a4b8cf;
+}
+
+@keyframes tau-grid-shift {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(48px);
+  }
+}
+
+@keyframes tau-sheen {
+  0%,
+  100% {
+    transform: translateX(0) rotate(22deg);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translateX(380%) rotate(22deg);
+    opacity: 0.8;
+  }
+}
+
+@keyframes tau-orbit-spin {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
 @media (max-width: 768px) {
   .qima-overlap {
     margin-top: 0;
@@ -300,6 +506,10 @@ section[id] {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
   }
+
+  .tau-tech-grid {
+    background-size: 32px 32px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -309,6 +519,7 @@ section[id] {
 
   .qima-reveal,
   .qima-reveal .qima-word,
+  .qima-reveal .qima-reveal-paragraph,
   .qima-reveal .qima-reveal-block,
   .qima-reveal .qima-box-reveal {
     transition: none;

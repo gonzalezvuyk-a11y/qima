@@ -37,6 +37,10 @@ const socials = [
 ];
 
 export function Footer() {
+  const pathname = typeof window !== "undefined" ? window.location.pathname : "/";
+  const isSubpage = pathname !== "/" && pathname !== "";
+  const baseHref = isSubpage ? "/" : "";
+
   return (
     <footer className="bg-[#0a0a0a] border-t border-white/[0.05]">
       {/* Top big section */}
@@ -93,7 +97,7 @@ export function Footer() {
                 {col.links.map((link) => (
                   <a
                     key={link.label}
-                    href={link.href}
+                    href={link.href.startsWith("#") ? `${baseHref}${link.href}` : link.href}
                     className="block text-white/30 hover:text-white transition-colors duration-300"
                     style={{ fontFamily: "Inter, sans-serif", fontSize: "0.875rem", fontWeight: 400 }}
                   >
@@ -119,7 +123,7 @@ export function Footer() {
               Recibí oportunidades y novedades del ecosistema QIMA.
             </p>
             <a
-              href="#contact"
+              href={`${baseHref}#contact`}
               className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#c8e645] text-[#0a0a0a] hover:bg-[#d4ee5a] transition-all duration-300"
               style={{ fontFamily: "Inter, sans-serif", fontSize: "0.8125rem", fontWeight: 500 }}
             >
