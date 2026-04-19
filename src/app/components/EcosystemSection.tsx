@@ -26,8 +26,6 @@ const companies = [
 ];
 
 export function EcosystemSection() {
-  const featured = companies[1];
-  const secondary = [companies[0], companies[2]];
   const [canHoverCursor, setCanHoverCursor] = useState(false);
   const [hoverCursor, setHoverCursor] = useState({
     active: false,
@@ -62,257 +60,142 @@ export function EcosystemSection() {
   return (
     <section
       id="ecosystem"
-      className="relative bg-[#0a0a0a] py-36 overflow-hidden"
+      className="relative overflow-hidden bg-[#061224] py-32"
       onMouseLeave={onCardLeave}
     >
       <div className="absolute inset-0 pointer-events-none">
         <div
-          className="absolute -top-24 left-[8%] h-72 w-72 rounded-full blur-[110px]"
+          className="absolute -top-28 left-[10%] h-72 w-72 rounded-full blur-[110px]"
           style={{
             background:
-              "radial-gradient(circle, rgba(200,230,69,0.12) 0%, rgba(200,230,69,0) 68%)",
-            animation: "ecoGlowA 18s ease-in-out infinite",
+              "radial-gradient(circle, rgba(200,230,69,0.08) 0%, rgba(200,230,69,0) 70%)",
+            animation: "ecoGlowA 20s ease-in-out infinite",
           }}
         />
         <div
-          className="absolute bottom-[-7rem] right-[6%] h-[22rem] w-[22rem] rounded-full blur-[120px]"
+          className="absolute bottom-[-8rem] right-[8%] h-[24rem] w-[24rem] rounded-full blur-[130px]"
           style={{
             background:
-              "radial-gradient(circle, rgba(123,184,168,0.11) 0%, rgba(123,184,168,0) 72%)",
-            animation: "ecoGlowB 22s ease-in-out infinite",
+              "radial-gradient(circle, rgba(123,184,168,0.09) 0%, rgba(123,184,168,0) 72%)",
+            animation: "ecoGlowB 24s ease-in-out infinite",
           }}
         />
         <div
-          className="absolute inset-0 opacity-[0.2]"
+          className="absolute inset-0 opacity-[0.14]"
           style={{
             backgroundImage:
-              "linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px)",
-            backgroundSize: "84px 84px",
+              "linear-gradient(to right, rgba(255,255,255,0.045) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.045) 1px, transparent 1px)",
+            backgroundSize: "92px 92px",
           }}
         />
       </div>
 
       <div className="max-w-[1440px] mx-auto px-12 relative z-10">
-        <div className="text-center max-w-[700px] mx-auto mb-16">
-          <div
-            className="text-[#c8e645]/60 mb-4 tracking-[0.2em] uppercase"
-            style={{ fontFamily: "Inter, sans-serif", fontSize: "0.6875rem", fontWeight: 500 }}
-          >
-            Ecosistema
+        <div className="max-w-[980px] mb-16">
+          <div className="inline-flex items-center gap-4 mb-7">
+            <span className="h-px w-9 bg-[#c8e645]/80" />
+            <span
+              className="text-[#c8e645]/78 uppercase"
+              style={{
+                fontFamily: "Inter, sans-serif",
+                fontSize: "0.78rem",
+                fontWeight: 500,
+                letterSpacing: "0.2em",
+              }}
+            >
+              Ecosistema
+            </span>
           </div>
           <h2
             className="text-white mb-6"
             style={{
-              fontFamily: "'DM Serif Display', serif",
-              fontSize: "2.75rem",
-              fontWeight: 400,
-              lineHeight: 1.15,
+              fontFamily: "Inter, sans-serif",
+              fontSize: "clamp(2.5rem, 5vw, 4rem)",
+              fontWeight: 460,
+              lineHeight: 1.08,
+              letterSpacing: "-0.03em",
             }}
           >
-            Empresas del{" "}
-            <em className="text-[#c8e645]" style={{ fontStyle: "italic" }}>ecosistema</em> QIMA
+            Empresas que forman parte del
+            <br />
+            ecosistema QIMA
           </h2>
           <p
-            className="text-white/45"
-            style={{ fontFamily: "Inter, sans-serif", fontSize: "1rem", fontWeight: 300, lineHeight: 1.7 }}
+            className="text-white/56 max-w-[860px]"
+            style={{
+              fontFamily: "Inter, sans-serif",
+              fontSize: "1.1rem",
+              fontWeight: 320,
+              lineHeight: 1.8,
+            }}
           >
-            La capacidad de QIMA se expresa en empresas, proyectos y alianzas activas que
-            amplían su alcance y convierten su visión en estructuras reales de negocio.
+            La capacidad de QIMA se expresa en empresas, proyectos y alianzas activas
+            que amplían su alcance y convierten su visión en estructuras reales de negocio.
           </p>
         </div>
 
-        <div className="grid grid-cols-12 gap-6 auto-rows-[minmax(130px,auto)]">
-          <a
-            href={featured.href}
-            className={`col-span-12 md:col-span-6 md:row-span-2 relative p-10 border border-white/[0.08] bg-white/[0.03] rounded-3xl hover:border-[#c8e645]/35 transition-all duration-500 group overflow-hidden ${canHoverCursor ? "cursor-none" : ""}`}
-            onMouseEnter={() => onCardEnter("Saber más")}
-            onMouseMove={onCardMove}
-            onMouseLeave={onCardLeave}
-          >
-            <div
-              className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
-              style={{
-                background:
-                  "radial-gradient(circle at 75% 20%, rgba(200,230,69,0.16) 0%, rgba(200,230,69,0) 58%)",
-              }}
-            />
-            <div
-              className="absolute top-0 left-8 right-8 h-[2px] rounded-full"
-              style={{ backgroundColor: featured.accent }}
-            />
-            <div
-              className="mb-7 tracking-[0.15em] relative z-10"
-              style={{
-                fontFamily: "Inter, sans-serif",
-                fontSize: "2.1rem",
-                fontWeight: 600,
-                color: featured.accent,
-              }}
+        <div className="grid grid-cols-12 gap-7">
+          {companies.map((company) => (
+            <a
+              key={company.name}
+              href={company.href}
+              className={`col-span-12 md:col-span-4 relative overflow-hidden rounded-[2px] border border-white/[0.1] bg-[linear-gradient(165deg,rgba(16,38,74,0.68)_0%,rgba(8,24,47,0.9)_60%,rgba(6,18,36,0.96)_100%)] p-10 transition-all duration-500 hover:-translate-y-1 hover:border-white/[0.2] hover:bg-[linear-gradient(165deg,rgba(18,44,86,0.74)_0%,rgba(9,28,56,0.92)_60%,rgba(7,20,39,0.98)_100%)] group ${canHoverCursor ? "cursor-none" : ""}`}
+              onMouseEnter={() => onCardEnter("Saber más")}
+              onMouseMove={onCardMove}
+              onMouseLeave={onCardLeave}
             >
-              {featured.name}
-            </div>
-            <h3
-              className="text-white mb-5 max-w-[520px] relative z-10"
-              style={{
-                fontFamily: "'DM Serif Display', serif",
-                fontSize: "2.2rem",
-                fontWeight: 400,
-                lineHeight: 1.1,
-              }}
-            >
-              Plataforma operativa y técnica para escalar oportunidades.
-            </h3>
-            <p
-              className="text-white/45 mb-9 max-w-[520px] relative z-10"
-              style={{ fontFamily: "Inter, sans-serif", fontSize: "1rem", fontWeight: 300, lineHeight: 1.75 }}
-            >
-              {featured.description}
-            </p>
-            <span
-              className="inline-flex items-center gap-2 text-white/70 hover:text-white transition-colors duration-300 group/link relative z-10"
-              style={{ fontFamily: "Inter, sans-serif", fontSize: "0.875rem", fontWeight: 500 }}
-            >
-              Conocer empresa
-              <ArrowRight className="w-4 h-4 group-hover/link:translate-x-1 transition-transform duration-300" />
-            </span>
-          </a>
-
-          {secondary.map((company) => {
-            const isLinked = company.href !== "#";
-
-            if (isLinked) {
-              return (
-                <a
-                  key={company.name}
-                  href={company.href}
-                  className={`col-span-12 md:col-span-6 relative p-9 border border-white/[0.06] bg-white/[0.02] rounded-3xl hover:border-white/[0.14] hover:bg-white/[0.045] transition-all duration-500 group ${canHoverCursor ? "cursor-none" : ""}`}
-                  onMouseEnter={() => onCardEnter("Saber más")}
-                  onMouseMove={onCardMove}
-                  onMouseLeave={onCardLeave}
-                >
-                  <div
-                    className="absolute top-0 left-6 right-6 h-[2px] rounded-full transition-all duration-500 opacity-0 group-hover:opacity-100"
-                    style={{ backgroundColor: company.accent }}
-                  />
-
-                  <div
-                    className="mb-8 tracking-[0.15em]"
-                    style={{
-                      fontFamily: "Inter, sans-serif",
-                      fontSize: "1.5rem",
-                      fontWeight: 600,
-                      color: company.accent,
-                    }}
-                  >
-                    {company.name}
-                  </div>
-
-                  <p
-                    className="text-white/40 mb-8"
-                    style={{ fontFamily: "Inter, sans-serif", fontSize: "0.9375rem", fontWeight: 300, lineHeight: 1.7 }}
-                  >
-                    {company.description}
-                  </p>
-
-                  <span
-                    className="inline-flex items-center gap-2 text-white/50 hover:text-white transition-colors duration-300 group/link"
-                    style={{ fontFamily: "Inter, sans-serif", fontSize: "0.8125rem", fontWeight: 400 }}
-                  >
-                    Conocer empresa
-                    <ArrowRight className="w-3.5 h-3.5 group-hover/link:translate-x-1 transition-transform duration-300" />
-                  </span>
-                </a>
-              );
-            }
-
-            return (
               <div
-                key={company.name}
-                className={`col-span-12 md:col-span-6 relative p-9 border border-white/[0.06] bg-white/[0.02] rounded-3xl hover:border-white/[0.14] hover:bg-white/[0.045] transition-all duration-500 group ${canHoverCursor ? "cursor-none" : ""}`}
-                onMouseEnter={() => onCardEnter("Saber más")}
-                onMouseMove={onCardMove}
-                onMouseLeave={onCardLeave}
-              >
-                <div
-                  className="absolute top-0 left-6 right-6 h-[2px] rounded-full transition-all duration-500 opacity-0 group-hover:opacity-100"
+                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                style={{
+                  background:
+                    "radial-gradient(circle at 82% 12%, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 54%)",
+                }}
+              />
+
+              <div className="relative z-10 mb-9 flex items-center gap-3">
+                <span
+                  className="h-8 w-[3px] rounded-full"
                   style={{ backgroundColor: company.accent }}
                 />
-
-                <div
-                  className="mb-8 tracking-[0.15em]"
+                <h3
+                  className="text-white tracking-[0.06em]"
                   style={{
                     fontFamily: "Inter, sans-serif",
-                    fontSize: "1.5rem",
-                    fontWeight: 600,
-                    color: company.accent,
+                    fontSize: "2.7rem",
+                    fontWeight: 320,
+                    lineHeight: 1,
                   }}
                 >
                   {company.name}
-                </div>
-
-                <p
-                  className="text-white/40 mb-8"
-                  style={{ fontFamily: "Inter, sans-serif", fontSize: "0.9375rem", fontWeight: 300, lineHeight: 1.7 }}
-                >
-                  {company.description}
-                </p>
-
-                <a
-                  href={company.href}
-                  className="inline-flex items-center gap-2 text-white/50 hover:text-white transition-colors duration-300 group/link"
-                  style={{ fontFamily: "Inter, sans-serif", fontSize: "0.8125rem", fontWeight: 400 }}
-                >
-                  Conocer empresa
-                  <ArrowRight className="w-3.5 h-3.5 group-hover/link:translate-x-1 transition-transform duration-300" />
-                </a>
+                </h3>
               </div>
-            );
-          })}
 
-          <div className="col-span-12 md:col-span-4 p-7 rounded-2xl border border-white/[0.06] bg-white/[0.015]">
-            <div
-              className="text-[#c8e645] mb-2"
-              style={{ fontFamily: "Inter, sans-serif", fontSize: "0.6875rem", fontWeight: 600, letterSpacing: "0.17em", textTransform: "uppercase" }}
-            >
-              Estructura
-            </div>
-            <p
-              className="text-white/70"
-              style={{ fontFamily: "Inter, sans-serif", fontSize: "0.9375rem", fontWeight: 400, lineHeight: 1.55 }}
-            >
-              Capital, ejecución y alianzas conectadas en una arquitectura de negocio.
-            </p>
-          </div>
+              <p
+                className="relative z-10 text-white/62 mb-16"
+                style={{
+                  fontFamily: "Inter, sans-serif",
+                  fontSize: "1.12rem",
+                  fontWeight: 300,
+                  lineHeight: 1.6,
+                }}
+              >
+                {company.description}
+              </p>
 
-          <div className="col-span-12 md:col-span-4 p-7 rounded-2xl border border-white/[0.06] bg-white/[0.015]">
-            <div
-              className="text-[#7bb8a8] mb-2"
-              style={{ fontFamily: "Inter, sans-serif", fontSize: "0.6875rem", fontWeight: 600, letterSpacing: "0.17em", textTransform: "uppercase" }}
-            >
-              Capacidad
-            </div>
-            <p
-              className="text-white/70"
-              style={{ fontFamily: "Inter, sans-serif", fontSize: "0.9375rem", fontWeight: 400, lineHeight: 1.55 }}
-            >
-              Equipos con know how técnico para convertir estrategia en operaciones reales.
-            </p>
-          </div>
-
-          <div className="col-span-12 md:col-span-4 p-7 rounded-2xl border border-white/[0.06] bg-white/[0.015]">
-            <div
-              className="text-[#8b9cc0] mb-2"
-              style={{ fontFamily: "Inter, sans-serif", fontSize: "0.6875rem", fontWeight: 600, letterSpacing: "0.17em", textTransform: "uppercase" }}
-            >
-              Alcance
-            </div>
-            <p
-              className="text-white/70"
-              style={{ fontFamily: "Inter, sans-serif", fontSize: "0.9375rem", fontWeight: 400, lineHeight: 1.55 }}
-            >
-              Un ecosistema diseñado para sostener expansión y crecimiento de largo plazo.
-            </p>
-          </div>
+              <span
+                className="relative z-10 inline-flex items-center gap-2 text-white/82 uppercase"
+                style={{
+                  fontFamily: "Inter, sans-serif",
+                  fontSize: "0.84rem",
+                  fontWeight: 500,
+                  letterSpacing: "0.15em",
+                }}
+              >
+                Conocer empresa
+                <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+              </span>
+            </a>
+          ))}
         </div>
       </div>
 

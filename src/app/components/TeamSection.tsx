@@ -1,38 +1,64 @@
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { useState } from "react";
+import lizRamirezImage from "../../imports/liz-ramirez.png";
+import enriqueGonzalezImage from "../../imports/enrique-gonzalez.png";
+import enriqueGRahiImage from "../../imports/enrique-g-rahi.png";
+import lizGonzalezImage from "../../imports/liz-gonzalez.png";
+import walterBastosImage from "../../imports/walter-bastos.png";
+
+function LinkedInOfficialIcon({ className = "" }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      aria-hidden="true"
+      className={className}
+    >
+      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.063 2.063 0 11.001-4.126 2.063 2.063 0 01-.001 4.126zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+    </svg>
+  );
+}
 
 const teamMembers = [
   {
-    name: "Carlos Méndez",
-    role: "CEO & Fundador",
-    image:
-      "https://images.unsplash.com/photo-1758599543154-76ec1c4257df?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxidXNpbmVzcyUyMGV4ZWN1dGl2ZSUyMG1hbiUyMHBvcnRyYWl0JTIwcHJvZmVzc2lvbmFsfGVufDF8fHx8MTc3NTkzNDIzOXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    bio: "Más de 20 años liderando proyectos de inversión en Latinoamérica. Visión estratégica y relaciones de alto nivel en el sector corporativo paraguayo.",
-    expertise: ["Estrategia corporativa", "M&A", "Relaciones institucionales"],
+    name: "Liz Ramírez",
+    role: "MBA, Arquitecta",
+    image: lizRamirezImage,
+    bio: "Con más de 20 años de experiencia en el desarrollo empresarial, aporta visión estratégica, liderazgo corporativo y una sólida trayectoria en estructuración de negocios.",
+    expertise: ["Desarrollo empresarial", "Arquitectura", "Estrategia corporativa"],
+    linkedin: "#",
   },
   {
-    name: "María Villalba",
-    role: "Directora de Operaciones",
-    image:
-      "https://images.unsplash.com/photo-1758518727888-ffa196002e59?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb3Jwb3JhdGUlMjB3b21hbiUyMGxlYWRlciUyMHBvcnRyYWl0JTIwY29uZmlkZW50fGVufDF8fHx8MTc3NTkzNDIzOXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    bio: "Especialista en estructuración operativa y gestión de portafolios. Experiencia en consultoría de alto nivel para grupos económicos regionales.",
-    expertise: ["Gestión operativa", "Due diligence", "Estructuración financiera"],
+    name: "Enrique González",
+    role: "MSC, Ingeniero Civil",
+    image: enriqueGonzalezImage,
+    bio: "Especialista en proyectos de ingeniería con amplia trayectoria en planificación, ejecución y supervisión técnica de plataformas de infraestructura y desarrollo.",
+    expertise: ["Ingeniería civil", "Gestión de proyectos", "Supervisión técnica"],
+    linkedin: "#",
   },
   {
-    name: "Andrés Méndez",
-    role: "Director de Desarrollo",
-    image:
-      "https://images.unsplash.com/photo-1762522926262-d96de462ad54?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx5b3VuZyUyMGJ1c2luZXNzbWFuJTIwc3VpdCUyMHBvcnRyYWl0JTIwaGVhZHNob3R8ZW58MXx8fHwxNzc1OTM0MjQwfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    bio: "Lidera la identificación y desarrollo de nuevas plataformas de negocio. Combina visión de mercado con capacidad de ejecución en sectores emergentes.",
-    expertise: ["Desarrollo de negocios", "Innovación", "Análisis de mercado"],
+    name: "Enrique G Rahi",
+    role: "Ingeniero Civil",
+    image: enriqueGRahiImage,
+    bio: "Especialista en proyectos de ingeniería y desarrollo estratégico, con foco en generación de conexiones de alto valor para impulsar nuevas oportunidades.",
+    expertise: ["Proyectos de ingeniería", "Conexiones estratégicas", "Desarrollo corporativo"],
+    linkedin: "#",
   },
   {
-    name: "Sofía Méndez",
-    role: "Directora de Alianzas",
-    image:
-      "https://images.unsplash.com/photo-1762522926984-e721bff0d6c6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjB3b21hbiUyMGV4ZWN1dGl2ZSUyMHBvcnRyYWl0JTIwZWxlZ2FudHxlbnwxfHx8fDE3NzU5MzQyNDB8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    bio: "Gestiona el ecosistema de aliados estratégicos y socios internacionales. Experta en construcción de redes de valor y partnerships de largo plazo.",
-    expertise: ["Alianzas estratégicas", "Networking", "Relaciones internacionales"],
+    name: "Liz González",
+    role: "Ingeniera Civil",
+    image: lizGonzalezImage,
+    bio: "Ingeniera civil certificada en procesos de innovación, con enfoque en mejora continua, ejecución disciplinada y coordinación técnica para proyectos de alto impacto.",
+    expertise: ["Ingeniería civil", "Innovación aplicada", "Mejora continua"],
+    linkedin: "#",
+  },
+  {
+    name: "Walter Bastos",
+    role: "Director Estratégico",
+    image: walterBastosImage,
+    bio: "Amplia trayectoria en el acompañamiento a empresas en Paraguay, integrando visión de negocio, liderazgo institucional y estructuración estratégica.",
+    expertise: ["Dirección estratégica", "Acompañamiento empresarial", "Desarrollo corporativo"],
+    linkedin: "#",
   },
 ];
 
@@ -73,7 +99,7 @@ export function TeamSection() {
         </div>
 
         {/* Team Grid — 4 portrait cards */}
-        <div className="grid grid-cols-4 gap-6 mb-16">
+        <div className="grid grid-cols-5 gap-6 mb-16">
           {teamMembers.map((m, i) => (
             <button
               key={m.name}
@@ -85,12 +111,24 @@ export function TeamSection() {
                   : "ring-1 ring-white/[0.06] hover:ring-white/10"
               }`}
             >
-              <div className="aspect-[3/4] overflow-hidden">
+              <div className="aspect-[3/4.4] overflow-hidden">
+                <div
+                  className={`absolute top-4 right-4 z-20 flex h-9 w-9 items-center justify-center rounded-full border transition-all duration-300 ${
+                    active === i
+                      ? "border-[#c8e645]/40 bg-[#0a0a0a]/45 text-[#c8e645]"
+                      : "border-white/20 bg-[#0a0a0a]/45 text-white/70 group-hover:border-white/30 group-hover:text-white"
+                  }`}
+                  aria-hidden="true"
+                >
+                  <LinkedInOfficialIcon className="h-[15px] w-[15px]" />
+                </div>
                 <ImageWithFallback
                   src={m.image}
                   alt={m.name}
                   className={`w-full h-full object-cover transition-all duration-700 ${
-                    active === i ? "scale-105" : "group-hover:scale-105 grayscale group-hover:grayscale-0"
+                    active === i
+                      ? "scale-[1.14] object-[center_24%]"
+                      : "scale-[1.09] object-[center_24%] group-hover:scale-[1.14] grayscale group-hover:grayscale-0"
                   }`}
                 />
                 <div
@@ -146,16 +184,28 @@ export function TeamSection() {
                 {member.bio}
               </p>
             </div>
-            <div className="flex flex-wrap gap-2 pt-1">
-              {member.expertise.map((tag) => (
-                <span
-                  key={tag}
-                  className="px-4 py-2 rounded-full border border-white/[0.08] text-white/40"
-                  style={{ fontFamily: "Inter, sans-serif", fontSize: "0.75rem", fontWeight: 400 }}
-                >
-                  {tag}
-                </span>
-              ))}
+            <div className="flex flex-col gap-6 pt-1 items-start md:items-end">
+              <div className="flex flex-wrap gap-2 justify-start md:justify-end">
+                {member.expertise.map((tag) => (
+                  <span
+                    key={tag}
+                    className="px-4 py-2 rounded-full border border-white/[0.08] text-white/40"
+                    style={{ fontFamily: "Inter, sans-serif", fontSize: "0.75rem", fontWeight: 400 }}
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              <a
+                href={member.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex h-12 w-12 items-center justify-center rounded-xl border border-[#c8e645]/45 bg-[#c8e645]/[0.05] text-[#c8e645] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#c8e645]/75 hover:bg-[#c8e645]/[0.12]"
+                aria-label={`LinkedIn de ${member.name}`}
+              >
+                <LinkedInOfficialIcon className="h-5 w-5" />
+                <span className="sr-only">LinkedIn</span>
+              </a>
             </div>
           </div>
         </div>
