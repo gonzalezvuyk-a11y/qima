@@ -3,6 +3,9 @@ import { useEffect, useState } from "react";
 export function Hero() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [introReady, setIntroReady] = useState(false);
+  const [isMobile, setIsMobile] = useState(() =>
+    typeof window !== "undefined" ? window.innerWidth < 768 : false
+  );
 
   useEffect(() => {
     let raf = 0;
@@ -35,13 +38,28 @@ export function Hero() {
     return () => window.clearTimeout(timer);
   }, []);
 
+  useEffect(() => {
+    const media = window.matchMedia("(max-width: 767px)");
+
+    const update = () => setIsMobile(media.matches);
+    update();
+
+    if (typeof media.addEventListener === "function") {
+      media.addEventListener("change", update);
+      return () => media.removeEventListener("change", update);
+    }
+
+    media.addListener(update);
+    return () => media.removeListener(update);
+  }, []);
+
   const heroExit = Math.min(scrollProgress / 0.56, 1);
-  const bgTranslate = -scrollProgress * 180;
-  const bgScale = 1 + scrollProgress * 0.1;
-  const bgRotate = scrollProgress * 1.2;
-  const introScale = introReady ? 1 : 1.22;
-  const introBlur = introReady ? "blur(0px)" : "blur(12px)";
-  const introOpacity = introReady ? 1 : 0.78;
+  const bgTranslate = -scrollProgress * (isMobile ? 96 : 180);
+  const bgScale = 1 + scrollProgress * (isMobile ? 0.035 : 0.1);
+  const bgRotate = isMobile ? 0 : scrollProgress * 1.2;
+  const introScale = introReady ? 1 : isMobile ? 1.06 : 1.22;
+  const introBlur = introReady ? "blur(0px)" : isMobile ? "blur(8px)" : "blur(12px)";
+  const introOpacity = introReady ? 1 : isMobile ? 0.9 : 0.78;
   const contentTranslate = -heroExit * 232;
   const contentOpacity = Math.max(1 - heroExit * 1.25, 0);
 
@@ -72,9 +90,11 @@ export function Hero() {
             loop
             playsInline
             preload="auto"
-            className="w-full h-full object-cover will-change-transform"
+            className={`w-full h-full will-change-transform ${
+              isMobile ? "object-contain object-bottom" : "object-cover"
+            }`}
             style={{
-              transform: `translate3d(0, ${-scrollProgress * 38}px, 0)`,
+              transform: `translate3d(0, ${-scrollProgress * (isMobile ? 16 : 38)}px, 0)`,
             }}
           />
         </div>
