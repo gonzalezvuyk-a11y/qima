@@ -1,1 +1,108 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap');
+@font-face {
+  font-family: "QIMA Sans";
+  src: url("/fonts/TT_Firs_Neue_Regular.ttf") format("truetype");
+  font-weight: 300 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "QIMA Sans";
+  src: url("/fonts/TT_Firs_Neue_Medium.ttf") format("truetype");
+  font-weight: 500 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "TT Firs Neue";
+  src: url("/fonts/TT_Firs_Neue_Regular.ttf") format("truetype");
+  font-weight: 300 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "TT Firs Neue";
+  src: url("/fonts/TT_Firs_Neue_Medium.ttf") format("truetype");
+  font-weight: 500 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "QIMA Serif";
+  src: url("/fonts/TT_Jenevers_Trial_Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "QIMA Serif";
+  src: url("/fonts/TT_Jenevers_VF_Trial_Italic.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "TT Jenevers";
+  src: url("/fonts/TT_Jenevers_Trial_Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "TT Jenevers";
+  src: url("/fonts/TT_Jenevers_VF_Trial_Italic.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/TT_Firs_Neue_Regular.ttf") format("truetype");
+  font-weight: 300 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/TT_Firs_Neue_Medium.ttf") format("truetype");
+  font-weight: 500 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "DM Serif Display";
+  src: url("/fonts/TT_Jenevers_Trial_Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "DM Serif Display";
+  src: url("/fonts/TT_Jenevers_VF_Trial_Italic.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+:root {
+  --font-body: "QIMA Sans", "TT Firs Neue", Inter, sans-serif;
+  --font-display: "QIMA Serif", "TT Jenevers", "DM Serif Display", serif;
+}
+
+html,
+body {
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}

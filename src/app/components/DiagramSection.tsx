@@ -64,6 +64,8 @@ interface Particle {
 export function DiagramSection() {
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
   const [draggingIdx, setDraggingIdx] = useState<number | null>(null);
+  const [isCenterHovered, setIsCenterHovered] = useState(false);
+  const [isCompactLayout, setIsCompactLayout] = useState(false);
 
   const positionsRef = useRef(
     NODE_CONFIGS.map((n) => {
@@ -128,6 +130,15 @@ export function DiagramSection() {
     };
   }, []);
 
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 1023px)");
+    const updateLayout = () => setIsCompactLayout(mediaQuery.matches);
+
+    updateLayout();
+    mediaQuery.addEventListener("change", updateLayout);
+    return () => mediaQuery.removeEventListener("change", updateLayout);
+  }, []);
+
   const handleMouseMove = useCallback(
     (e: React.MouseEvent) => {
       if (!containerRef.current) return;
@@ -185,18 +196,21 @@ export function DiagramSection() {
   }, []);
 
   return (
-    <section className="relative bg-[#0a0a0a] py-36 overflow-visible">
-      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] rounded-full border border-white/[0.015]" />
+    <section className="relative overflow-visible bg-[#0a0a0a] py-24 md:py-28 xl:py-36">
+      <div className="absolute left-1/2 top-1/2 hidden h-[900px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/[0.015] lg:block" />
 
-      <div className="max-w-[1440px] mx-auto px-12">
-        <div className="flex items-center gap-16">
+      <div className="mx-auto max-w-[1440px] px-5 sm:px-6 lg:px-12">
+        <div className="flex flex-col gap-10 lg:flex-row lg:items-center lg:gap-16">
           {/* Left: Text content */}
-          <div className="flex-shrink-0 w-[440px]">
-            <div
-              className="text-[#c8e645]/70 mb-5 tracking-[0.2em] uppercase"
-              style={{ fontFamily: "Inter, sans-serif", fontSize: "0.6875rem", fontWeight: 500 }}
-            >
-              Lógica QIMA
+          <div className="w-full max-w-[440px] flex-shrink-0">
+            <div className="mb-8 inline-flex items-center gap-3">
+              <span className="h-[12px] w-[12px] rounded-[4px] bg-[#c8e645]" />
+              <span
+                className="text-white/85"
+                style={{ fontFamily: "var(--font-body)", fontSize: "0.9375rem", fontWeight: 400, letterSpacing: "0.01em" }}
+              >
+                Lógica QIMA
+              </span>
             </div>
             <h2
               className="text-white mb-6"
@@ -213,32 +227,107 @@ export function DiagramSection() {
               QIMA articula los elementos clave para transformar una oportunidad en una
               estructura de valor: relaciones, conocimiento, capital y visión estratégica.
             </p>
-            <p
-              className="text-white/15"
-              style={{ fontFamily: "Inter, sans-serif", fontSize: "0.75rem", fontWeight: 300, letterSpacing: "0.05em" }}
-            >
-              Arrastrá los nodos para explorar las conexiones
-            </p>
           </div>
 
           {/* Right: Interactive Diagram */}
-          <div className="flex-1 flex justify-end">
-            <div
-              ref={containerRef}
-              className="relative select-none"
-              style={{ width: SIZE, height: SIZE, cursor: draggingIdx !== null ? "grabbing" : "default" }}
-              onMouseMove={handleMouseMove}
-              onMouseLeave={handleMouseLeave}
-              onMouseUp={handleMouseUp}
-            >
+          {isCompactLayout ? (
+            <div className="w-full">
+              <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-[radial-gradient(circle_at_top,rgba(200,230,69,0.12),transparent_45%),linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01))] p-6 sm:p-8">
+                <div className="mx-auto flex h-28 w-28 items-center justify-center rounded-full border border-[#c8e645]/20 bg-[#0f0f0f] shadow-[0_0_60px_rgba(200,230,69,0.12)] sm:h-32 sm:w-32">
+                  <div
+                    aria-label="QIMA"
+                    className="h-[2rem] w-[4.8rem] sm:h-[2.2rem] sm:w-[5.4rem]"
+                    style={{
+                      backgroundColor: "#c8e645",
+                      WebkitMaskImage: "url('/brand/qima-logo.svg')",
+                      maskImage: "url('/brand/qima-logo.svg')",
+                      WebkitMaskRepeat: "no-repeat",
+                      maskRepeat: "no-repeat",
+                      WebkitMaskPosition: "center",
+                      maskPosition: "center",
+                      WebkitMaskSize: "contain",
+                      maskSize: "contain",
+                    }}
+                  />
+                </div>
+
+                <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+                  {NODE_CONFIGS.map((node) => (
+                    <article
+                      key={node.label}
+                      className="rounded-[1.4rem] border border-white/10 bg-white/[0.04] p-5"
+                    >
+                      <div className="mb-4 inline-flex rounded-full border border-white/10 bg-white/[0.04] p-3" style={{ color: node.color }}>
+                        {node.icon}
+                      </div>
+                      <div
+                        className="text-white"
+                        style={{ fontFamily: "Inter, sans-serif", fontSize: "1rem", fontWeight: 500, letterSpacing: "0.03em" }}
+                      >
+                        {node.label}
+                      </div>
+                      <div
+                        className="mt-1"
+                        style={{ fontFamily: "Inter, sans-serif", fontSize: "0.8125rem", fontWeight: 400, color: node.color }}
+                      >
+                        {node.sub}
+                      </div>
+                      <p
+                        className="mt-3 text-white/60"
+                        style={{ fontFamily: "Inter, sans-serif", fontSize: "0.85rem", fontWeight: 300, lineHeight: 1.7 }}
+                      >
+                        {node.description}
+                      </p>
+                    </article>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className="flex flex-1 justify-end pr-4 xl:pr-12">
+              <div
+                ref={containerRef}
+                className="relative select-none"
+                style={{ width: SIZE, height: SIZE, cursor: draggingIdx !== null ? "grabbing" : "default" }}
+                onMouseMove={handleMouseMove}
+                onMouseLeave={handleMouseLeave}
+                onMouseUp={handleMouseUp}
+              >
               <svg
                 viewBox={`0 0 ${SIZE} ${SIZE}`}
                 className="absolute inset-0 w-full h-full"
                 style={{ overflow: "visible" }}
               >
-                <circle cx={centerPos.x} cy={centerPos.y} r={310} fill="none" stroke="white" strokeOpacity={0.06} strokeWidth={0.7} />
-                <circle cx={centerPos.x} cy={centerPos.y} r={RADIUS} fill="none" stroke="white" strokeOpacity={0.11} strokeWidth={0.8} />
-                <circle cx={centerPos.x} cy={centerPos.y} r={158} fill="none" stroke="#c8e645" strokeOpacity={0.12} strokeWidth={0.8} />
+                <circle
+                  cx={centerPos.x}
+                  cy={centerPos.y}
+                  r={310}
+                  fill="none"
+                  stroke="white"
+                  strokeOpacity={0.06}
+                  strokeWidth={0.7}
+                  style={{ animation: "orbitBreathA 18s ease-in-out infinite" }}
+                />
+                <circle
+                  cx={centerPos.x}
+                  cy={centerPos.y}
+                  r={RADIUS}
+                  fill="none"
+                  stroke="white"
+                  strokeOpacity={0.11}
+                  strokeWidth={0.8}
+                  style={{ animation: "orbitBreathB 14s ease-in-out infinite" }}
+                />
+                <circle
+                  cx={centerPos.x}
+                  cy={centerPos.y}
+                  r={158}
+                  fill="none"
+                  stroke="#c8e645"
+                  strokeOpacity={0.12}
+                  strokeWidth={0.8}
+                  style={{ animation: "orbitBreathC 12s ease-in-out infinite" }}
+                />
 
                 {positions.map((pos, i) => {
                   const isActive = hoveredIdx === i || draggingIdx === i;
@@ -278,22 +367,46 @@ export function DiagramSection() {
                   transform: "translate(-50%, -50%)",
                   cursor: draggingIdx === -1 ? "grabbing" : "grab",
                 }}
+                onMouseEnter={() => setIsCenterHovered(true)}
+                onMouseLeave={() => setIsCenterHovered(false)}
                 onMouseDown={(e) => handleNodeMouseDown(-1, e)}
               >
                 <div
                   className="w-[10.5rem] h-[10.5rem] rounded-full bg-gradient-to-br from-[#1a1a1a] to-[#0a0a0a] border border-[#c8e645]/15 flex items-center justify-center"
                   style={{
                     boxShadow:
-                      "0 0 92px rgba(200,230,69,0.14), inset 0 0 40px rgba(200,230,69,0.06)",
+                      isCenterHovered || draggingIdx === -1
+                        ? "0 0 110px rgba(200,230,69,0.24), inset 0 0 52px rgba(200,230,69,0.11)"
+                        : "0 0 92px rgba(200,230,69,0.14), inset 0 0 40px rgba(200,230,69,0.06)",
                     animation: "qimaCorePulse 5.5s ease-in-out infinite",
+                    transition: "box-shadow 0.3s ease, border-color 0.3s ease",
+                    borderColor:
+                      isCenterHovered || draggingIdx === -1 ? "rgba(200,230,69,0.34)" : "rgba(200,230,69,0.15)",
                   }}
                 >
-                  <span
-                    className="text-white tracking-[0.3em]"
-                    style={{ fontFamily: "Inter, sans-serif", fontSize: "1.5rem", fontWeight: 600 }}
-                  >
-                    QIMA
-                  </span>
+                  <div
+                    aria-label="QIMA"
+                    className="w-[5.8rem] h-[2.45rem]"
+                    style={{
+                      backgroundColor:
+                        isCenterHovered || draggingIdx === -1 ? "#c8e645" : "rgba(255,255,255,0.96)",
+                      WebkitMaskImage: "url('/brand/qima-logo.svg')",
+                      maskImage: "url('/brand/qima-logo.svg')",
+                      WebkitMaskRepeat: "no-repeat",
+                      maskRepeat: "no-repeat",
+                      WebkitMaskPosition: "center",
+                      maskPosition: "center",
+                      WebkitMaskSize: "contain",
+                      maskSize: "contain",
+                      filter:
+                        isCenterHovered || draggingIdx === -1
+                          ? "drop-shadow(0 0 14px rgba(200,230,69,0.34))"
+                          : "none",
+                      transform:
+                        isCenterHovered || draggingIdx === -1 ? "scale(1.04)" : "scale(1)",
+                      transition: "background-color 0.25s ease, filter 0.25s ease, transform 0.25s ease",
+                    }}
+                  />
                 </div>
                 <div
                   className="absolute inset-0 rounded-full border border-[#c8e645]/8"
@@ -338,7 +451,7 @@ export function DiagramSection() {
                         boxShadow: isActive
                           ? `0 0 70px ${node.color}26, 0 8px 34px ${node.color}18`
                           : `0 0 24px ${node.color}0d`,
-                        animation: `nodeFloat ${7 + i * 0.8}s ease-in-out infinite ${i * 0.25}s`,
+                        animation: `nodeFloat ${7 + i * 0.8}s ease-in-out infinite ${i * 0.25}s, nodeBreath ${9 + i * 0.7}s ease-in-out infinite ${i * 0.18}s`,
                       }}
                     >
                       <div
@@ -428,12 +541,25 @@ export function DiagramSection() {
                   </div>
                 );
               })}
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
 
       <style>{`
+        @keyframes orbitBreathA {
+          0%, 100% { transform: scale(1); opacity: 0.85; }
+          50% { transform: scale(1.018); opacity: 1; }
+        }
+        @keyframes orbitBreathB {
+          0%, 100% { transform: scale(1); opacity: 0.78; }
+          50% { transform: scale(1.024); opacity: 1; }
+        }
+        @keyframes orbitBreathC {
+          0%, 100% { transform: scale(1); opacity: 0.72; }
+          50% { transform: scale(1.03); opacity: 1; }
+        }
         @keyframes pulse-ring {
           0% { transform: scale(1); opacity: 0.75; }
           100% { transform: scale(2.2); opacity: 0; }
@@ -447,8 +573,14 @@ export function DiagramSection() {
           50% { transform: scale(1.035); }
         }
         @keyframes nodeFloat {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-6px); }
+          0%, 100% { transform: translate3d(0, 0, 0); }
+          25% { transform: translate3d(1px, -4px, 0); }
+          50% { transform: translate3d(0, -7px, 0); }
+          75% { transform: translate3d(-1px, -3px, 0); }
+        }
+        @keyframes nodeBreath {
+          0%, 100% { filter: brightness(1) saturate(1); }
+          50% { filter: brightness(1.05) saturate(1.08); }
         }
       `}</style>
     </section>

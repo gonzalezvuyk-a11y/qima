@@ -68,6 +68,15 @@ export default function App() {
   const isArtiaPage = pathname === "/artia" || pathname === "/artia/";
 
   useEffect(() => {
+    const root = document.documentElement;
+
+    if (isTauPage || isCippPage || isArtiaPage) {
+      root.classList.add("qima-static-reveal");
+      return () => root.classList.remove("qima-static-reveal");
+    }
+
+    root.classList.remove("qima-static-reveal");
+
     const sections = Array.from(
       document.querySelectorAll<HTMLElement>(".qima-reveal")
     );
@@ -132,7 +141,7 @@ export default function App() {
 
     sections.forEach((section) => observer.observe(section));
     return () => observer.disconnect();
-  }, []);
+  }, [isArtiaPage, isCippPage, isTauPage, pathname]);
 
   if (isTauPage) {
     return <TauPage />;
@@ -150,7 +159,7 @@ export default function App() {
     <div
       id="top"
       className="qima-page min-h-screen bg-[#0a0a0a]"
-      style={{ fontFamily: "Inter, sans-serif" }}
+      style={{ fontFamily: "var(--font-body)" }}
     >
       <Header />
 
